@@ -1,0 +1,224 @@
+import random
+#Setup board
+r1c1 = "-"
+r1c2 = "-"
+r1c3 = "-"
+
+r2c1 = "-"
+r2c2 = "-"
+r2c3 = "-"
+
+r3c1 = "-"
+r3c2 = "-"
+r3c3 = "-"
+#All variables used: r1c1,r1c2,r1c3,r2c1,r2c2,r2c3,r3c1,r3c2,r3c3
+def printBoard():
+  print(r1c1,r1c2,r1c3)
+  print(r2c1,r2c2,r2c3)
+  print(r3c1,r3c2,r3c3)
+print("Tic Tac Toe!")
+
+#Determine player as x or o
+player1 = random.choice(["x", "o"])
+player2 = ""
+p1selectr = ""
+p1selectc = ""
+p2selectr = ""
+p2selectc = ""
+playerturn = ""
+winner = ""
+error = True
+p1winner = False
+p2winner = False
+player1score = 0
+player2score = 0
+endGame = False
+gameCont = "y"
+
+#autoMode turns on random selection "AI"
+autoMode = True
+
+#Player with "x" always goes first. If player 1 is "x", then player 2 must be "o". 
+if(player1 == "x"):
+  player2 = "o"
+  playerturn = 1
+else:
+  player2 = "x"
+  playerturn = 2
+
+print()
+print("Player 1 is "+player1)
+print("Player 2 is "+player2)
+print()
+
+while(endGame != True):
+  #Player 1 turn
+  while(gameCont == "y" and playerturn == 1):
+    if(autoMode == False):
+      #Prompt the player to select a row/column
+      p1selectr = int(input("Player 1 select a row: "))
+      p1selectc = int(input("Player 1 select a column: "))
+    if(autoMode == True):
+      #A random row/column is selected
+      p1selectr = random.randint(1,3)
+      print("AI 1 Row Select: " + str(p1selectr))
+      p1selectc = random.randint(1,3)
+      print("AI 1 Row Select: " + str(p1selectc))
+    #When a row and column have been selected, the program check to see if the tile is empty, and if it is, it will go to the next player's turn. 
+    #If the value inputted is not a number between 1-3, the program will output "Invalid Input. Try Again." and loop the section.
+    if (p1selectr==1):
+      if (p1selectc==1 and r1c1 == "-"):
+        r1c1 = player1
+        playerturn = 2
+      elif (p1selectc==2 and r1c2 == "-"):
+        r1c2 = player1
+        playerturn = 2
+      elif (p1selectc==3 and r1c3 == "-"):
+        r1c3 = player1
+        playerturn = 2
+      else:
+        print("Invalid Input. Try Again.")
+    elif (p1selectr==2):
+      if (p1selectc==1 and r2c1 == "-"):
+        r2c1 = player1
+        playerturn = 2
+      elif (p1selectc==2 and r2c2 == "-"):
+        r2c2 = player1
+        playerturn = 2
+      elif (p1selectc==3 and r2c3 == "-"):
+        r2c3 = player1
+        playerturn = 2
+      else:
+        print("Invalid Input. Try Again.")
+    elif (p1selectr==3):
+      if (p1selectc==1 and r3c1 == "-"):
+        r3c1 = player1
+        playerturn = 2
+      elif (p1selectc==2 and r3c2 == "-"):
+        r3c2 = player1
+        playerturn = 2
+      elif (p1selectc==3 and r3c3 == "-"):
+        r3c3 = player1
+        playerturn = 2
+      else:
+        print("Invalid Input. Try Again.")
+    else:
+      print("Invalid Input. Try Again.")
+      playerturn = 2
+    printBoard()
+    
+  #Player 2 turn.
+  #Mostly the same code from player 1, except it is for player 2.
+  while(winner != True and playerturn == 2):
+    if(autoMode == False):
+      p2selectr = int(input("Player 2 select a row: "))
+      p2selectc = int(input("Player 2 Select a column: "))
+    if(autoMode == True):
+      p2selectr = random.randint(1,3)
+      print("AI 2 Row Select: " + str(p2selectr))
+      p2selectc = random.randint(1,3)
+      print("AI 2 Row Select: " + str(p2selectc))
+    if (p2selectr==1):
+      if (p2selectc==1 and r1c1 == "-"):
+        r1c1 = player2
+        playerturn = 1
+      elif (p2selectc==2 and r1c2 == "-"):
+        r1c2 = player2
+        playerturn = 1
+      elif (p2selectc==3 and r1c3 == "-"):
+        r1c3 = player2
+        playerturn = 1
+      else:
+        print("Invalid Input. Try Again.")
+    elif (p2selectr==2):
+      if (p2selectc==1 and r2c1 == "-"):
+        r2c1 = player2
+        playerturn = 1
+      elif (p2selectc==2 and r2c2 == "-"):
+        r2c2 = player2
+        playerturn = 1
+      elif (p2selectc==3 and r2c3 == "-"):
+        r2c3 = player2
+        playerturn = 1
+      else:
+        print("Invalid Input. Try Again.")
+    elif (p2selectr==3):
+      if (p2selectc==1 and r3c1 == "-"):
+        r3c1 = player2
+        playerturn = 1
+      elif (p2selectc==2 and r3c2 == "-"):
+        r3c2 = player2
+        playerturn = 1
+      elif (p2selectc==3 and r3c3 == "-"):
+        r3c3 = player2
+        playerturn = 1
+      else:
+        print("Invalid Input. Try Again.")
+    else:
+      print("Invalid Input. Try Again.")
+      playerturn = 1
+    printBoard()
+  
+  #Win condition
+  #Test player 1 win condition
+    #All possible winning combinition are tested. 
+  if (player1 == r1c1 == r1c2 == r1c3 or player1 == r2c1 == r2c2 == r2c3 or player1 == r3c1 == r3c2 == r3c3 or player1 == r1c1 == r2c1 == r3c1 or player1 == r1c2 == r2c2 == r3c2 or player1 == r1c3 == r2c3 == r3c3 or player1 == r1c1 == r2c2 == r3c3 or player1 == r1c3 == r2c2 == r3c1):
+    p1winner = True
+    winner = True
+  if (p1winner == True):
+    print("The winner is Player 1!")
+    player1score = player1score + 1
+    winner = True
+    p1winner = False
+  
+  #Test player 2 win condtion
+    
+  if (player2 == r1c1 == r1c2 == r1c3 or player2 == r2c1 == r2c2 == r2c3 or player2 == r3c1 == r3c2 == r3c3 or player2 == r1c1 == r2c1 == r3c1 or player2 == r1c2 == r2c2 == r3c2 or player2 == r1c3 == r2c3 == r3c3 or player2 == r1c1 == r2c2 == r3c3 or player2 == r1c3 == r2c2 == r3c1):
+    p2winner = True
+    winner = True
+  if (p2winner == True):
+    print("The winner is Player 2!")
+    player2score = player2score + 1
+    winner = True
+    p2winner = False
+
+    #Test for Tie
+      #If all the tiles are filled, and there is no winner, the game is a tie.
+  if(winner != True and r1c1 != "-" and r1c2 != "-"and r1c3 != "-" and r2c1 != "-" and r2c2 != "-" and r2c3 != "-" and r3c1 != "-" and r3c2 != "-" and r3c3 != "-"):
+    print("The game is a Tie!")
+    winner = False
+  #Scoreboard
+    #The scoreboard shows whenever there is a winner or a tie.
+  if(winner == True or winner == False and endGame != True):
+    print("Player 1 Score is " + str(player1score))
+    print("Player 2 Score is " + str(player2score))
+    #Continue?
+      #If "y" is inputted when "Play again? (y/n): ", the game will clear the board, reset all values except the score, and loop the game again.
+      #If "n" is inputted, the game will stop, and will output "Game Over!"
+    error = True
+  if(winner == True or winner == False and endGame == False):
+    while(error != False and endGame != True):
+      gameCont = str(input("Play again? (y/n): "))
+      if(gameCont == "y"):
+        endGame = False
+        winner = ""
+        r1c1 = "-"
+        r1c2 = "-"
+        r1c3 = "-"
+        
+        r2c1 = "-"
+        r2c2 = "-"
+        r2c3 = "-"
+        
+        r3c1 = "-"
+        r3c2 = "-"
+        r3c3 = "-"
+        error = False
+      elif(gameCont == "n"):
+        endGame = True
+      else:
+        print("Invalid input! Try again. ")
+        error = True
+
+  
+print("Game Over!")
